@@ -10,15 +10,17 @@ namespace Task12
     {
 
         /* Шейкер-сортировка */
-        static int[] ShakerSort(int[] mass)
+        static int[] ShakerSort(int[] mass)//n^2
         {
             int left = 0,
                 right = mass.Length - 1,
                 CountCompares = 0,
                 CountExchanges = 0;
+            bool flag = true;
 
-            while (left <= right)
+            while (left <= right&&flag)
             {
+                flag = false;
                 for (int i = left; i < right; i++)
                 {
                     CountCompares++;
@@ -26,6 +28,7 @@ namespace Task12
                     {
                         Swap(mass, i, i + 1);
                         CountExchanges++;
+                        flag = true;
                     }
                 }
                 right--;
@@ -37,6 +40,7 @@ namespace Task12
                     {
                         Swap(mass, i - 1, i);
                         CountExchanges+=2;
+                        flag = true;
                     }
                 }
                 left++;
@@ -45,7 +49,8 @@ namespace Task12
             Console.WriteLine("Количество пересылок = "+CountExchanges);
             return mass;
         }
-        static int[] ShellSort(int[] mass)
+        /* Сортировка Шелла */
+        static int[] ShellSort(int[] mass)//n^2
         {
             int j;
             int CountCompares=0,
@@ -97,11 +102,37 @@ namespace Task12
         }
         static void Main(string[] args)
         {
-            int[] mass = new int[] { 44, 55, 12, 42, 94, 18, 6, 67 };
-            int[] mass1 = new int[] { 44, 55, 12, 42, 94, 18, 6, 67 };
+            int[] mass = new int[] { 44, 55, 12, 42, 94, 18, 6, 67, 3, 15, 14, 49, 115, 187, 144, 1, 13, 428, 2, 45, 18, 33 };
+            int[] mass1 = new int[] { 44, 55, 12, 42, 94, 18, 6, 67, 3, 15, 14, 49, 115, 187, 144, 1, 13, 428, 2, 45, 18, 33 };
+            Console.WriteLine("Сортировка неупорядоченных массивов: ");
+            Console.WriteLine("Шейкер-сортировка");
             mass1 = ShakerSort(mass1);
+            ShowArray(mass1);
+            Console.WriteLine("Сортировка Шелла");
             mass = ShellSort(mass);
             ShowArray(mass);
+            Console.Read();
+            int[] SortedUp = new int[] { 1, 2, 3, 6, 12, 13, 14, 15, 18, 18, 33, 42, 44, 45, 49, 55, 67, 94, 115, 144, 187, 428 };
+            int[] SortedUp1 = new int[] { 1, 2, 3, 6, 12, 13, 14, 15, 18, 18, 33, 42, 44, 45, 49, 55, 67, 94, 115, 144, 187, 428 };
+            Console.WriteLine("Сортировка массивов, упорядоченных по возрастанию");
+            Console.WriteLine("Шейкер-сортировка");
+            SortedUp = ShakerSort(SortedUp);
+            ShowArray(SortedUp);
+            Console.WriteLine("Сортировка Шелла");
+            SortedUp1 = ShellSort(SortedUp1);
+            ShowArray(SortedUp1);
+            Console.Read();
+            Console.Read();
+            int[] SortedDown = new int[] {428, 187,144,115,94,67,55,49,45,44,42,33,18,18,15,14,13,12,6,3,2,1 };
+            int[] SortedDown1 = new int[] { 428, 187, 144, 115, 94, 67, 55, 49, 45, 44, 42, 33, 18, 18, 15, 14, 13, 12, 6, 3, 2, 1 };
+            Console.WriteLine("Сортировка массивов, упорядоченных по убыванию");
+            Console.WriteLine("Шейкер-сортировка");
+            SortedDown = ShakerSort(SortedDown);
+            ShowArray(SortedDown);
+            Console.WriteLine("Сортировка Шелла");
+            SortedDown1 = ShellSort(SortedDown1);
+            ShowArray(SortedDown1);
+            Console.Read();
             Console.Read();
         }
     }
